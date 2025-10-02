@@ -8,6 +8,9 @@
     "ui5Libs": "Local resources (OpenUI5)",
     "newDir": false,
     "initRepo": true,
-    "projectId": "ns.zpatrimonioaf.zpatrimonioaf"
+    "projectId": "ns.zpatrimonioaf.zpatrimonioaf",
+    "uimodules": [
+      "zpatrimonioaf"
+    ]
   }
 }
