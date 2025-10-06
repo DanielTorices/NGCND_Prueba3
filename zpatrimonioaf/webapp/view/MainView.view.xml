@@ -1,7 +1,252 @@
-<mvc:View controllerName="zpatrimonioaf.controller.MainView"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+<mvc:View
+    controllerName="zpatrimonioaf.controller.MainView"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:rowmodes="sap.ui.table.rowmodes"
+    xmlns:form="sap.ui.layout.form"
+>
+    <f:DynamicPage>
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <HBox
+                        justifyContent="SpaceBetween"
+                        alignItems="End"
+                        width="100%"
+                    >
+                        <Button
+                            id="_IDGenButton3"
+                            icon="sap-icon://home"
+                            press="onBack"
+                            width="auto"
+                            type="Transparent"
+                        />
+                        <ToolbarSpacer
+                            id="_IDGenToolbarSpacer1"
+                            width="1rem"
+                        />
+
+                        <Title
+                            id="_IDGenTitle"
+                            text="Cuadro de activos fijos"
+                        />
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <HBox
+                    justifyContent="SpaceAround"
+                    alignItems="End"
+                >
+                    <VBox>
+                        <Label
+                            text="Sociedad"
+                            required="true"
+                        />
+                        <MultiComboBox
+                            id="combosociedad"
+                            items="{ModelCombobox>/Sociedades}"
+                        >
+                            <core:Item
+                                id="SociedadItem"
+                                key="{ModelCombobox>Sociedad}"
+                                text="{ModelCombobox>Sociedad}"
+                            />
+                        </MultiComboBox>
+                    </VBox>
+                    <VBox id="_IDGenVBox2">
+                        <Label
+                            id="_IDGenLabel2"
+                            text="Fecha del informe:"
+                        />
+                        <HBox id="_IDGenHBox1">
+                            <DateRangeSelection id="_IDGenDateRangeSelection" />
+                            <Button
+                                id="_IDGenButton"
+                                icon="sap-icon://decline"
+                                tooltip="Limpiar fecha"
+                                type="Transparent"
+                                press=".onClearDateRange"
+                                class="clearIcon"
+                            />
+                        </HBox>
+                    </VBox>
+                    <Button
+                        id="b1"
+                        text="Ir"
+                        type="Emphasized"
+                        press=".onPress"
+                    />
+                </HBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <table:Table
+                id="table"
+                selectionMode="Single"
+                rows="{path:'localModel>/datos'}"
+                rowSelectionChange="onRowSelectionChange"
+            >
+                <table:rowMode>
+                    <rowmodes:Auto
+                        id="_IDGenAuto"
+                        minRowCount="5"
+                        maxRowCount="20"
+                    />
+                </table:rowMode>
+                <table:extension>
+                    <Toolbar id="_IDGenToolbar1">
+                        <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                        <Button
+                            id="_IDGenButton1"
+                            type="Emphasized"
+                            press=".onExportToExcel"
+                            icon="sap-icon://excel-attachment"
+                            text="Exportar"
+                        />
+                    </Toolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="ActivoFijo"
+                        filterProperty="ActivoFijo"
+                    >
+                        <Label text="Activo fijo" />
+                        <table:template>
+                            <Text text="{localModel>ActivoFijo}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="Subnumero"
+                        filterProperty="Subnumero"
+                    >
+                        <Label text="Subnúmero" />
+                        <table:template>
+                            <Text text="{localModel>Subnumero}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="CapitalizadoEl"
+                        filterProperty="CapitalizadoEl"
+                    >
+                        <Label text="Capitalizado el" />
+                        <table:template>
+                            <Text text="{localModel>CapitalizadoEl}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="DenominacionDelActivoFijo"
+                        filterProperty="DenominacionDelActivoFijo"
+                    >
+                        <Label text="Denominación del activo fijo" />
+                        <table:template>
+                            <Text
+                                text="{localModel>DenominacionActivoFijo}"
+                            />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="ValAdq"
+                        filterProperty="ValAdq"
+                    >
+                        <Label text="Val.adq." />
+                        <table:template>
+                            <Text text="{localModel>ValAdq}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="AmoAcum"
+                        filterProperty="AmoAcum"
+                    >
+                        <Label text="Amo acum." />
+                        <table:template>
+                            <Text text="{localModel>AmoAcum}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="ValCont"
+                        filterProperty="ValCont"
+                    >
+                        <Label text="Val.cont." />
+                        <table:template>
+                            <Text text="{localModel>ValCont}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="Moneda"
+                        filterProperty="Moneda"
+                    >
+                        <Label text="Moneda" />
+                        <table:template>
+                            <Text text="{localModel>Moneda}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="Sociedad"
+                        filterProperty="Sociedad"
+                    >
+                        <Label text="Sociedad" />
+                        <table:template>
+                            <Text text="{localModel>Sociedad}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="Division"
+                        filterProperty="Division"
+                    >
+                        <Label text="División" />
+                        <table:template>
+                            <Text text="{localModel>Division}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="PosBalance"
+                        filterProperty="PosBalance"
+                    >
+                        <Label text="Pos.balance" />
+                        <table:template>
+                            <Text text="{localModel>PosBalance}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="CuentaBalanceCAP"
+                        filterProperty="CuentaBalanceCAP"
+                    >
+                        <Label text="Cuenta balance CAP" />
+                        <table:template>
+                            <Text text="{localModel>CuentaBalanceCAP}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column
+                        width="12rem"
+                        sortProperty="ClaseActivosFijos"
+                        filterProperty="ClaseActivosFijos"
+                    >
+                        <Label text="Clase activos fijos" />
+                        <table:template>
+                            <Text text="{localModel>ClaseActivosFijos}" />
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

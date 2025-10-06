@@ -13,6 +13,12 @@
         "sourceTemplate": {
             "id": "@sap-ux/fiori-freestyle-writer:basic",
             "version": "0.21.10"
+        },
+        "dataSources": {
+            "aw01nApp": {
+                "uri": "http://localhost:8081/index.html",
+                "type" : "URI"
+            }
         }
     },
     "sap.ui": {
@@ -32,12 +38,14 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
         "dependencies": {
             "minUI5Version": "1.136.1",
             "libs": {
                 "sap.m": {},
-                "sap.ui.core": {}
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.ui.table": {}
             }
         },
         "contentDensities": {
