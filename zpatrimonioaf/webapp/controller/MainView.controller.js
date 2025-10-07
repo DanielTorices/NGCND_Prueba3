@@ -20,16 +20,11 @@ sap.ui.define(
 
     return Controller.extend("zpatrimonioaf.controller.MainView", {
       onInit: function () {
-        this.oModel = new JSONModel(
-          sap.ui.require.toUrl("zpatrimonioaf/model/localModel.json")
-        );
+        const oModel = new JSONModel();
+        oModel.attachRequestCompleted(this.changeItemsCombobox.bind(this));
+        const sUrl = sap.ui.require.toUrl("zpatrimonioaf/model/localModel.json");
+        oModel.loadData(sUrl);
         this.getOwnerComponent().setModel(this.oModel, "Sociedades");
-        if (this.oModel) {
-          // Se ejecuta cuando el JSON se cargó completamente
-          this.oModel.attachRequestCompleted(
-            this.changeItemsCombobox.bind(this)
-          );
-        }
       },
       onBack: function () {
         // eslint-disable-next-line fiori-custom/sap-no-hardcoded-url, fiori-custom/sap-no-localhost, fiori-custom/sap-no-location-usage
