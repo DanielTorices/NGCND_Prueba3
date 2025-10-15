@@ -24,6 +24,7 @@ sap.ui.define(
         oModel.attachRequestCompleted(this.changeItemsCombobox.bind(this));
         const sUrl = sap.ui.require.toUrl("zpatrimonioaf/model/localModel.json");
         oModel.loadData(sUrl);
+        this.oModel = oModel;
         this.getOwnerComponent().setModel(this.oModel, "Sociedades");
       },
       onBack: function () {
